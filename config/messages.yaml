@@ -8,6 +8,17 @@ common:
   invalid_channel_id: "无效的频道 ID。"
   internal_error: "发生内部错误，请稍后重试或联系管理员。"
 
+logs:
+  invalid_line_count: "行数必须大于 0。"
+  file_missing: "{log_type_name}日志文件不存在。"
+  file_empty: "{log_type_name}日志文件为空。"
+  too_long: "{log_type_name}日志过长，以文件形式发送。"
+  inline_result: "**{log_type_name}日志最后 {x} 行**:\n```{content}```"
+  types:
+    main: "主要"
+    keyword: "关键词检测"
+    room: "房间活动"
+
 rooms:
   control_panel:
     title: "☀ 阿波罗房间管理助手"

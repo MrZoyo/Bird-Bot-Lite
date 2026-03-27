@@ -29,11 +29,12 @@ class LiteBot(commands.Bot):
         self.global_commands_synced = False
 
     async def setup_hook(self) -> None:
-        from .cogs import RoomCog, TeamupBoardCog, TeamupCog
+        from .cogs import CheckStatusCog, RoomCog, TeamupBoardCog, TeamupCog
 
         configure_logging(self.config_store)
         await self.repository.initialize()
 
+        await self.add_cog(CheckStatusCog(self))
         await self.add_cog(TeamupBoardCog(self))
         await self.add_cog(TeamupCog(self))
         await self.add_cog(RoomCog(self))

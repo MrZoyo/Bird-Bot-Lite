@@ -1,7 +1,13 @@
+import sys
 from pathlib import Path
+
+PROJECT_ROOT = Path(__file__).resolve().parent
+SRC_DIR = PROJECT_ROOT / "src"
+if str(SRC_DIR) not in sys.path:
+    sys.path.insert(0, str(SRC_DIR))
 
 from birt_bot_lite.bot import run_bot
 
 
 if __name__ == "__main__":
-    run_bot(Path(__file__).resolve().parent)
+    run_bot(PROJECT_ROOT)

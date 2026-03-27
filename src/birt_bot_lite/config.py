@@ -48,12 +48,17 @@ class ConfigStore:
             self.yaml.dump(self.settings, handle)
 
     def _load_yaml(self, path: Path) -> Any:
-        if not path.exists():
-            raise FileNotFoundError(f"配置文件不存在: {path}")
-        with path.open("r", encoding="utf-8") as handle:
+        source_path = path
+        if not source_path.exists():
+            example_path = path.with_suffix(".example.yaml")
+            if example_path.exists():
+                source_path = example_path
+            else:
+                raise FileNotFoundError(f"配置文件不存在: {path}")
+        with source_path.open("r", encoding="utf-8") as handle:
             data = self.yaml.load(handle)
         if data is None:
-            raise ValueError(f"配置文件为空: {path}")
+            raise ValueError(f"配置文件为空: {source_path}")
         return data
 
     @property

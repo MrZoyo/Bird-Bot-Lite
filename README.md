@@ -16,6 +16,7 @@
 Birt-Bot-Lite/
 ├── config/
 │   ├── messages.yaml
+│   ├── settings.example.yaml
 │   └── settings.yaml
 ├── data/
 ├── run.py
@@ -30,7 +31,9 @@ Birt-Bot-Lite/
 ## 配置设计
 
 - `config/settings.yaml`
-  - 所有运行设置、频道 ID、开关、正则、颜色、日志、刷新间隔
+  - 本地运行配置，不提交敏感信息
+- `config/settings.example.yaml`
+  - 可提交的配置样例，首次使用时复制为 `settings.yaml`
 - `config/messages.yaml`
   - 所有用户可见文案、embed 标题、footer、按钮文字、提示语
 
@@ -39,8 +42,9 @@ Birt-Bot-Lite/
 ## 启动
 
 1. 安装依赖：`pip install -r requirements.txt`
-2. 修改 `config/settings.yaml` 中的 `discord.token`、`discord.guild_id`、各频道 ID
-3. 运行：`python run.py`
+2. 复制 `config/settings.example.yaml` 为 `config/settings.yaml`
+3. 修改 `config/settings.yaml` 中的 `discord.token`、`discord.guild_id`、各频道 ID
+4. 运行：`python run.py`
 
 ## 主要命令
 
@@ -48,6 +52,7 @@ Birt-Bot-Lite/
 - `/vc_remove`
 - `/vc_list`
 - `/check_temp_channel_records`
+- `/check_log`
 - `/invt`
 - `/invt_addignorelist`
 - `/invt_removeignorelist`
