@@ -11,7 +11,7 @@ discord:
   guild_id: 1145141919810
 
   # Bot 在线状态文字
-  presence: "在鸟群里拉人组队"
+  presence: "在阿波罗群里拉人组队"
 
 admin:
   # 管理类命令限制使用的频道

@@ -10,7 +10,7 @@ common:
 
 rooms:
   control_panel:
-    title: "🐦 小鸟房间管理助手"
+    title: "☀ 阿波罗房间管理助手"
     footer: "👇 点击下方按钮使用功能"
     soundboard_enabled_text: "开启"
     soundboard_disabled_text: "关闭"
@@ -62,7 +62,7 @@ teamup:
     default_title: "快来和我一起玩！"
     invite_button: "📣 点我进入房间"
     create_room_button: "📣 点我创建房间"
-    room_full_button: "🚫 房间满员点我"
+    room_full_button: "🚫 满员点我"
     footer: "---------------- 点击下方按钮进入房间 ----------------"
     description: |-
       - 📢 语音频道: {vc_url}
