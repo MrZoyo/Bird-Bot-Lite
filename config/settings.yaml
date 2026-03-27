@@ -1,0 +1,86 @@
+# =========================
+# Birt-Bot-Lite 运行配置
+# 所有“设置类”配置统一放在这里
+# =========================
+
+discord:
+  # Bot Token
+  token: "YOUR_BOT_TOKEN"
+
+  # 目标服务器 ID
+  guild_id: 1145141919810
+
+  # Bot 在线状态文字
+  presence: "在鸟群里拉人组队"
+
+admin:
+  # 管理类命令限制使用的频道
+  command_channel_id: 1145141919810
+
+logging:
+  # 所有日志路径都相对项目根目录
+  main_file: "./data/birt_bot_lite.log"
+  keyword_file: "./data/teamup_keyword.log"
+  room_file: "./data/room_activity.log"
+
+appearance:
+  # Embed 颜色统一放在这里，文案不放这里
+  colors:
+    info: "#3498db"
+    success: "#2ecc71"
+    warning: "#f1c40f"
+    danger: "#e74c3c"
+    room_public: "#3498db"
+    room_private: "#e74c3c"
+    board: "#b3414c"
+
+rooms:
+  # 定时清理失效房间记录的间隔（分钟）
+  cleanup_interval_minutes: 60
+
+  # 当用户名触发 Discord 词汇拦截时使用的兜底房名
+  blocked_name_fallback_suffix: "id被Discord屏蔽请及时修改"
+
+  # 建房入口模板
+  templates:
+    - channel_id: 1145141919810
+      name_prefix: "游戏房"
+      visibility: "public"
+    - channel_id: 1145141919811
+      name_prefix: "私密房"
+      visibility: "private"
+
+teamup:
+  # 用户不在语音时，默认引导他去哪个建房入口
+  default_create_room_channel_id: 1145141919810
+
+  # 组队消息过期时间（分钟）
+  invite_expire_minutes: 5
+
+  # 个性签名最大长度
+  signature_max_length: 50
+
+  # 永久忽略的用户 ID
+  ignore_user_ids: []
+
+  # 永久忽略的频道 ID
+  ignore_channel_ids: []
+
+  ignore_short_messages:
+    enabled: true
+    exact_length: 6
+    allow_keywords:
+      - "flex"
+      - "rank"
+      - "aram"
+
+  keyword_detection:
+    # 自动识别“缺人/等人/Q人”等组队表达
+    regex: "(?:(缺|等|[=＝]|[Qq]))(?:(\\d|[一二三四五]|[nN]|全世界|world|World))(?!(分|分钟|min|个钟|小时))"
+
+teamup_board:
+  # 展示板刷新间隔（分钟）
+  refresh_interval_minutes: 2
+
+  # 展示板上单条组队文案的最大显示长度
+  max_content_length: 50

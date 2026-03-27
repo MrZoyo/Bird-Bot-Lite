@@ -1,0 +1,16 @@
+[project]
+name = "birt-bot-lite"
+version = "0.1.0"
+description = "A focused Discord bot for room creation and team-up automation."
+requires-python = ">=3.11"
+dependencies = [
+  "discord.py>=2.3.2",
+  "aiosqlite>=0.20.0",
+  "ruamel.yaml>=0.18.10",
+]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
