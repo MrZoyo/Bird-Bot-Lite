@@ -28,6 +28,27 @@ class LiteBot(commands.Bot):
         self.repository = LiteRepository(db_path)
         self.global_commands_synced = False
 
+    async def sync_application_commands(
+        self,
+        guild: discord.abc.Snowflake | None = None,
+    ) -> tuple[int, int]:
+        target_guild = guild or self.get_guild(self.config_store.guild_id) or discord.Object(
+            id=self.config_store.guild_id
+        )
+
+        # Clear any stale guild-scoped command copies so global commands are not shadowed.
+        self.tree.clear_commands(guild=target_guild)
+        cleared_guild_commands = await self.tree.sync(guild=target_guild)
+        global_commands = await self.tree.sync()
+
+        logging.info(
+            "Guild commands cleared for %s: %s; global commands synced: %s",
+            self.config_store.guild_id,
+            len(cleared_guild_commands),
+            len(global_commands),
+        )
+        return len(cleared_guild_commands), len(global_commands)
+
     async def setup_hook(self) -> None:
         from .cogs import CheckStatusCog, RoomCog, TeamupBoardCog, TeamupCog
 
@@ -49,9 +70,9 @@ class LiteBot(commands.Bot):
                     activity=discord.Game(name=str(self.config_store.settings["discord"]["presence"]))
                 )
                 if not self.global_commands_synced:
-                    synced = await self.tree.sync()
+                    _, synced_count = await self.sync_application_commands(guild)
                     self.global_commands_synced = True
-                    logging.info("Global commands synced: %s", len(synced))
+                    logging.info("Global commands synced: %s", synced_count)
             else:
                 logging.info("Bot connected to non-target guild: %s", guild.name)
 
@@ -99,8 +120,8 @@ def create_bot(project_root: Path) -> LiteBot:
 
     @bot.command()
     async def synccommands(ctx: commands.Context) -> None:
-        synced = await bot.tree.sync()
-        await ctx.send(f"Commands synced: {len(synced)}")
+        _, synced_count = await bot.sync_application_commands()
+        await ctx.send(f"Commands synced: {synced_count}")
 
     return bot
 
